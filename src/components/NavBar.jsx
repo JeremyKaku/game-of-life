@@ -39,7 +39,7 @@ export default function NavBar() {
     <nav className="nav">
       <Link to="/" className="site-title">Home</Link>
       <ul>
-        <CustomLink to="/grid">Grid</CustomLink>
+        <CustomLink to="/game">Game</CustomLink>
         <CustomLink to="/credits">Credits</CustomLink>
       </ul>
     </nav>

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import NavBar from './components/NavBar'
 import Home from './pages/Home'
-import Grid from './pages/Grid'
+import GameOfLife from './pages/GameOfLife'
 import Credits from './pages/Credits'
 import { Route, Routes } from 'react-router-dom'
 
@@ -15,7 +15,7 @@ function App() {
       <div className='container'>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/grid' element={<Grid />} />
+          <Route path='/game' element={<GameOfLife />} />
           <Route path='/credits' element={<Credits />} />
         </Routes>
       </div>
