@@ -1,0 +1,59 @@
+.banner {
+  margin-top: 7rem;
+  padding: 0;
+  background-position: top center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  text-align: left;
+}
+
+.banner h1 {
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  line-height: 1;
+  margin-bottom: 3rem;
+  display: block;
+}
+
+.banner p {
+  /* color: #B8B8B8; */
+  font-size: 18px;
+  letter-spacing: 0.8px;
+  line-height: 1.5em;
+  width: 96%;
+}
+
+ol {
+  padding: 0;
+  color: #FF9900;
+}
+
+li {
+  list-style-position: inside;
+}
+
+.banner button {
+  font-weight: 700;
+  font-size: 20px;
+  margin-top: 30px;
+  margin-bottom: 3rem;
+  letter-spacing: 0.8px;
+  display: flex;
+  align-items: center;
+}
+
+.banner button svg {
+  font-size: 25px;
+  margin-left: 10px;
+  transition: 0.3s ease-in-out;
+  line-height: 1;
+}
+
+.banner button:hover svg {
+  margin-left: 25px;
+}
+
+.txt-rotate>.wrap {
+  border-right: 0.08em solid #666;
+}
