@@ -1,3 +1,7 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
 @font-face {
   font-family: Centra;
   src: url('./assets/font/CentraNo2-Bold.ttf');
@@ -19,6 +23,12 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 75px;
+  height: 100%;
+  background-image: linear-gradient(to top, #d4aac8 0%, #fef9d7 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
 }
 
 body {
@@ -26,7 +36,7 @@ body {
   font-weight: 400;
   overflow-x: hidden;
   position: relative;
-  background-color: #FFF8DC;
+  /* background-color: #FFF8DC; */
   font-family: 'Centra', sans-serif !important;
 }
 

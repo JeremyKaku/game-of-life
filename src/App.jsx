@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import './App.css'
 import NavBar from './components/NavBar'
 import Home from './pages/Home'
@@ -7,8 +6,6 @@ import Credits from './pages/Credits'
 import { Route, Routes } from 'react-router-dom'
 
 function App() {
-
-
   return (
     <>
       <NavBar />
@@ -23,4 +20,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
