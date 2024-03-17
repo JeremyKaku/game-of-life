@@ -2,11 +2,11 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import { Navbar, Nav, Container } from "react-bootstrap";
-import '../styles/NavBar.css'
+import "../styles/NavBar.css";
 
 function CustomLink({ to, children, ...props }) {
-  const resolvedPath = useResolvedPath(to)
-  const isActive = useMatch({ path: resolvedPath.pathname, end: true })
+  const resolvedPath = useResolvedPath(to);
+  const isActive = useMatch({ path: resolvedPath.pathname, end: true });
 
   return (
     <li className={isActive ? "active" : ""}>
@@ -14,7 +14,7 @@ function CustomLink({ to, children, ...props }) {
         {children}
       </Link>
     </li>
-  )
+  );
 }
 
 export default function NavBar() {
@@ -34,10 +34,11 @@ export default function NavBar() {
   //   return () => window.removeEventListener("scroll", onScroll);
   // }, [])
 
-
   return (
     <nav className="nav">
-      <Link to="/" className="site-title">Home</Link>
+      <Link to="/" className="site-title">
+        Home
+      </Link>
       <ul>
         <CustomLink to="/game">Game</CustomLink>
         <CustomLink to="/credits">Credits</CustomLink>
@@ -54,6 +55,5 @@ export default function NavBar() {
     //     </Nav>
     //   </Navbar.Collapse>
     // </Navbar>
-
-  )
+  );
 }
