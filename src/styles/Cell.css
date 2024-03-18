@@ -7,7 +7,8 @@
 }
 
 .cell:hover {
-  background: #37e1f7;
+  border: 2px solid white;
+  cursor: pointer;
 }
 
 .off {

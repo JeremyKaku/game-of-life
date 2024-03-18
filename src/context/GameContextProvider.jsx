@@ -20,7 +20,7 @@ export default function GameContextProvider({ children }) {
     const initialGrid = Array.from({ length: row }, () =>
       Array.from({ length: col }, () => ({
         lastAlive: 0,
-        status: false,
+        status: Math.random() <= 0.05,
       }))
     );
 

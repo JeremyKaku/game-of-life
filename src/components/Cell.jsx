@@ -9,16 +9,16 @@ function Cell(props) {
 
   let aliveStatus = cellState.cellGrid[props.row][props.col].status;
   let lastAlive = cellState.cellGrid[props.row][props.col].lastAlive;
-  function onClick(index) {
+
+  function onClick() {
     let newCellState = { ...cellState };
     newCellState.cellGrid[props.row][props.col].status =
       !newCellState.cellGrid[props.row][props.col].status;
     if (newCellState.cellGrid[props.row][props.col].status) {
       newCellState.aliveCount += 1;
     }
+    lastAlive = newCellState.cellGrid[props.row][props.col].lastAlive;
     setCellState(newCellState);
-    console.log(index);
-    // aliveStatus = !aliveStatus;
   }
 
   let className = "cell off";
