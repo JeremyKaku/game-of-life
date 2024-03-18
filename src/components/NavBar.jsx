@@ -1,7 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
-import { Navbar, Nav, Container } from "react-bootstrap";
 import '../styles/NavBar.css'
 import logo from '../assets/img/pixel_-cat.svg';
 

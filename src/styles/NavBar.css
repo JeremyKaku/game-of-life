@@ -6,11 +6,6 @@ body {
   margin: 0;
 }
 
-.container {
-  margin: 2rem;
-  text-align: center;
-}
-
 .nav {
   position: fixed;
   overflow: hidden;
@@ -23,7 +18,8 @@ body {
   justify-content: space-between;
   align-items: stretch;
   gap: 2rem;
-  padding: 0 1rem;
+  padding: 0 2rem;
+  z-index: 1000;
 }
 
 .site-title {

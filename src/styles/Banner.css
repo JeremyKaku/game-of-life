@@ -4,6 +4,11 @@
   text-align: left;
 }
 
+.container {
+  margin: 2rem 3rem;
+  text-align: center;
+}
+
 .banner h1 {
   font-size: 40px;
   font-weight: 700;
