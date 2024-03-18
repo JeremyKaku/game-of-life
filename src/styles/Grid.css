@@ -1,3 +1,7 @@
-h1 {
-  margin-top: 6rem;
+.cellRow {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 }
