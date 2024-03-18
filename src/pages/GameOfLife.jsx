@@ -178,7 +178,7 @@ export default function GameOfLife() {
           Reset
         </button>
         <button id="singal" className="button" onClick={handleSingleStep}>
-          Next Step
+          Next Frame
         </button>
         <button id="auto-play" className="button" onClick={handleAutoPlay}>
           Auto Play
