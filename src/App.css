@@ -19,6 +19,12 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 75px;
+  height: 100%;
+  background-image: linear-gradient(to top, #d4aac8 0%, #fef9d7 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
 }
 
 body {
@@ -26,7 +32,7 @@ body {
   font-weight: 400;
   overflow-x: hidden;
   position: relative;
-  background-color: #FFF8DC;
+  /* background-color: #FFF8DC; */
   font-family: 'Centra', sans-serif !important;
 }
 
