@@ -20,14 +20,8 @@
 }
 
 .heatmap {
-  background: linear-gradient(
-    90deg,
-    #07b1a6,
-    #239a3b
-  ); /* Green to Dark Green gradient */
+  background: linear-gradient(90deg, #07b1a6, #239a3b);
 }
-
-/* Define colors for dead times 0 to 10 */
 
 .heatmap-10 {
   background-color: #0a807e;
