@@ -18,6 +18,8 @@ function Cell(props) {
       !newCellState.cellGrid[props.row][props.col].status;
     if (newCellState.cellGrid[props.row][props.col].status) {
       newCellState.aliveCount += 1;
+    } else {
+      newCellState.aliveCount -= 1;
     }
     lastAlive = newCellState.cellGrid[props.row][props.col].lastAlive;
     setCellState(newCellState);
