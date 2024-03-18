@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { GameContext } from "../context/GameContextProvider";
 import "../styles/Cell.css";
+import PropTypes from "prop-types";
 
 function Cell(props) {
   const { contextValue } = useContext(GameContext);
@@ -21,50 +22,52 @@ function Cell(props) {
     setCellState(newCellState);
   }
 
-  let className = "cell off";
+  let className = "cell";
 
   if (aliveStatus) {
-    // className = className + "-" + lastAlive;
-    className = "cell on";
-
-    // switch (lastAlive) {
-    //   case 0:
-    //     className = "cell alive";
-    //     break;
-    //   case 1:
-    //     className = "cell alive1";
-    //     break;
-    //   case 2:
-    //     className = "cell alive2";
-    //     break;
-    //   case 3:
-    //     className = "cell alive3";
-    //     break;
-    //   case 4:
-    //     className = "cell alive4";
-    //     break;
-    //   case 5:
-    //     className = "cell alive5";
-    //     break;
-    //   case 6:
-    //     className = "cell alive6";
-    //     break;
-    //   case 7:
-    //     className = "cell alive7";
-    //     break;
-    //   case 8:
-    //     className = "cell alive8";
-    //     break;
-    //   case 9:
-    //     className = "cell alive8";
-    //     break;
-    //   default:
-    //     className = "cell alive";
-    //     break;
-    // }
+    switch (lastAlive) {
+      case 0:
+        className += " heatmap-" + lastAlive;
+        break;
+      case 1:
+        className += " heatmap-" + lastAlive;
+        break;
+      case 2:
+        className += " heatmap-" + lastAlive;
+        break;
+      case 3:
+        className += " heatmap-" + lastAlive;
+        break;
+      case 4:
+        className += " heatmap-" + lastAlive;
+        break;
+      case 5:
+        className += " heatmap-" + lastAlive;
+        break;
+      case 6:
+        className += " heatmap-" + lastAlive;
+        break;
+      case 7:
+        className += " heatmap-" + lastAlive;
+        break;
+      case 8:
+        className += " heatmap-" + lastAlive;
+        break;
+      case 9:
+        className += " heatmap-" + lastAlive;
+        break;
+      default:
+        className += " heatmap-10";
+        break;
+    }
   } else {
-    className = "cell off";
+    className += " off";
   }
+
+  Cell.propTypes = {
+    row: PropTypes.number,
+    col: PropTypes.number,
+  };
 
   return <div className={className} onClick={onClick}></div>;
 }

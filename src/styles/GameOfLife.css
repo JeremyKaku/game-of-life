@@ -10,3 +10,7 @@ h1 {
 .bottom {
   margin-top: 2rem;
 }
+
+.error {
+  color: red;
+}

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import { useContext } from "react";
 import { GameContext } from "../context/GameContextProvider.jsx";
 import Cell from "../components/Cell.jsx";
 import "../styles/Grid.css";

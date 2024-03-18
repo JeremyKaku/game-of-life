@@ -22,42 +22,43 @@
 .heatmap {
   background: linear-gradient(
     90deg,
-    #196127,
+    #07b1a6,
     #239a3b
   ); /* Green to Dark Green gradient */
 }
 
 /* Define colors for dead times 0 to 10 */
-.heatmap-0 {
-  background-color: #ffffff;
-} /* White for dead time 0 */
-.heatmap-1 {
-  background-color: #eeffe6;
-}
-.heatmap-2 {
-  background-color: #b3ffcc;
-}
-.heatmap-3 {
-  background-color: #80ffaa;
-}
-.heatmap-4 {
-  background-color: #4dff88;
-}
-.heatmap-5 {
-  background-color: #1aff66;
-}
-.heatmap-6 {
-  background-color: #00e659;
-}
-.heatmap-7 {
-  background-color: #00cc52;
-}
-.heatmap-8 {
-  background-color: #00b34c;
+
+.heatmap-10 {
+  background-color: #0a807e;
 }
 .heatmap-9 {
+  background-color: #0cc3c0;
+}
+.heatmap-8 {
+  background-color: #0dd2cf;
+}
+.heatmap-7 {
+  background-color: #4dff88;
+}
+.heatmap-6 {
+  background-color: #1aff66;
+}
+.heatmap-5 {
+  background-color: #00e659;
+}
+.heatmap-4 {
+  background-color: #00cc52;
+}
+.heatmap-3 {
+  background-color: #00b34c;
+}
+.heatmap-2 {
   background-color: #009946;
 }
-.heatmap-10 {
+.heatmap-1 {
   background-color: #008040;
+}
+.heatmap-0 {
+  background-color: black;
 }

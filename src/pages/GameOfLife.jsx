@@ -1,16 +1,17 @@
-import React, { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import "../styles/GameOfLife.css";
 import Grid from "../components/Grid";
 import { GameContext } from "../context/GameContextProvider";
-// import Button from "react-bootstrap/Button";
-// import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function GameOfLife() {
-  const [isRunning, setIsRunning] = useState(true);
+  const [isRunning, setIsRunning] = useState(false);
   const { contextValue } = useContext(GameContext);
   const cellState = contextValue.cellState;
   const setCellState = contextValue.setCellState;
-  const INTERVAL_MS = 1000;
+  const INTERVAL_MS = 100;
+  const [inputRows, setInputRows] = useState("");
+  const [inputCols, setInputCols] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
   function countNeighbors(cellGrid, row, col) {
     let count = 0;
@@ -59,31 +60,118 @@ export default function GameOfLife() {
         }
       }
     }
+    newCellState.aliveCount = newCellState.cellGrid
+      .flat()
+      .filter((cell) => cell.status).length;
     setCellState(newCellState);
   }
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      generateNextGeneration();
-    }, 2000);
+    let intervalId;
+    if (isRunning) {
+      intervalId = setInterval(() => {
+        generateNextGeneration();
+      }, INTERVAL_MS);
+    }
 
     return () => clearInterval(intervalId);
-  }, []);
+  }, [cellState, isRunning]);
+
+  function handleReset() {
+    contextValue.resetGrid(20, 20);
+    setIsRunning(false);
+    setInputCols("");
+    setInputRows("");
+    setErrorMsg("");
+  }
+
+  function handleSingleStep() {
+    setIsRunning(false);
+    generateNextGeneration();
+  }
+
+  function handleInputRowsChange(e) {
+    let value = e.target.value.replace(/[^\d]/g, "").replace(/^0+/, "");
+    if (value.length > 2) {
+      value = value.slice(0, 2);
+    }
+    setInputRows(value);
+  }
+
+  function handleInputColsChange(e) {
+    let value = e.target.value.replace(/[^\d]/g, "").replace(/^0+/, "");
+    if (value.length > 2) {
+      value = value.slice(0, 2);
+    }
+    setInputCols(value);
+  }
+
+  function handleSubmit() {
+    setErrorMsg("");
+    console.log(inputRows);
+    if (inputRows === "") {
+      setErrorMsg("Please enter a value for Height!");
+      return;
+    }
+
+    if (inputCols === "") {
+      setErrorMsg("Please enter a value for Width!");
+      return;
+    }
+
+    if (inputRows < 3 || inputRows > 40) {
+      setErrorMsg("Height must be between 3 and 40!");
+      return;
+    }
+    if (inputCols < 3 || inputCols > 40) {
+      setErrorMsg("Width must be between 3 and 40!");
+      return;
+    }
+
+    contextValue.resetGrid(inputRows, inputCols);
+  }
+
+  function handleAutoPlay() {
+    setIsRunning(!isRunning);
+  }
 
   return (
     <div>
       <h1>Game of Life</h1>
-      <div className="msg"></div>
+
       <div className="condition">
-        <input type="text" id="height" placeholder="Height"></input>
-        <input type="text" id="width" placeholder="Width"></input>
-        <button id="submit">Submit</button>
+        <div className="error">{errorMsg}</div>
+        <input
+          type="text"
+          id="height"
+          placeholder="Height"
+          onChange={handleInputRowsChange}
+          value={inputRows}
+        ></input>
+        <input
+          type="text"
+          id="width"
+          placeholder="Width"
+          onChange={handleInputColsChange}
+          value={inputCols}
+        ></input>
+        <button id="submit" onClick={handleSubmit}>
+          Submit
+        </button>
       </div>
+      <h3>Alive Count: {cellState.aliveCount}</h3>
 
       <Grid />
       <div className="bottom">
-        <button id="reset">Reset</button>
-        <button id="singal">Next Step</button>
+        <button id="reset" onClick={handleReset}>
+          Reset
+        </button>
+        <button id="singal" onClick={handleSingleStep}>
+          Next Step
+        </button>
+        <button id="auto-play" onClick={handleAutoPlay}>
+          Auto Play
+        </button>
       </div>
     </div>
   );
