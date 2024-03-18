@@ -7,6 +7,7 @@ function Grid() {
   const { contextValue } = useContext(GameContext);
   const gridComponent = [];
 
+  // Create the grid
   for (let i = 0; i < contextValue.cellState.cellGrid.length; i++) {
     const rowConponent = [];
     const row = contextValue.cellState.cellGrid[i];

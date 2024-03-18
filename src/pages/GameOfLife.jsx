@@ -13,6 +13,7 @@ export default function GameOfLife() {
   const [inputCols, setInputCols] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
 
+  //Count the cell's neighbors
   function countNeighbors(cellGrid, row, col) {
     let count = 0;
     const directions = [
@@ -42,6 +43,7 @@ export default function GameOfLife() {
     return count;
   }
 
+  //Generate the next generation of cells
   function generateNextGeneration() {
     let newCellState = { ...cellState };
     for (let i = 0; i < newCellState.cellGrid.length; i++) {
@@ -66,6 +68,7 @@ export default function GameOfLife() {
     setCellState(newCellState);
   }
 
+  //Auto play
   useEffect(() => {
     let intervalId;
     if (isRunning) {
@@ -77,6 +80,7 @@ export default function GameOfLife() {
     return () => clearInterval(intervalId);
   }, [cellState, isRunning]);
 
+  //Reset the grid
   function handleReset() {
     contextValue.resetGrid(20, 20);
     setIsRunning(false);
@@ -85,11 +89,13 @@ export default function GameOfLife() {
     setErrorMsg("");
   }
 
+  //Single step
   function handleSingleStep() {
     setIsRunning(false);
     generateNextGeneration();
   }
 
+  //Handle the input for the height
   function handleInputRowsChange(e) {
     let value = e.target.value.replace(/[^\d]/g, "").replace(/^0+/, "");
     if (value.length > 2) {
@@ -98,6 +104,7 @@ export default function GameOfLife() {
     setInputRows(value);
   }
 
+  //Handle the input for the width
   function handleInputColsChange(e) {
     let value = e.target.value.replace(/[^\d]/g, "").replace(/^0+/, "");
     if (value.length > 2) {
@@ -106,6 +113,7 @@ export default function GameOfLife() {
     setInputCols(value);
   }
 
+  //Handle the submit button
   function handleSubmit() {
     setErrorMsg("");
     console.log(inputRows);
@@ -131,6 +139,7 @@ export default function GameOfLife() {
     contextValue.resetGrid(inputRows, inputCols);
   }
 
+  //Handle the auto play button
   function handleAutoPlay() {
     setIsRunning(!isRunning);
   }

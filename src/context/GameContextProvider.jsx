@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import PropTypes from "prop-types";
 
 export const GameContext = createContext();
 
@@ -6,7 +7,7 @@ export default function GameContextProvider({ children }) {
   const [row, setRow] = useState(20);
   const [col, setCol] = useState(20);
 
-  const [rate, setRate] = useState(0.5);
+  const [rate] = useState(0.05);
 
   const [cellState, setCellState] = useState(() => {
     const initialGrid = Array.from({ length: row }, () =>
@@ -58,6 +59,10 @@ export default function GameContextProvider({ children }) {
     resetGrid,
     setRow,
     setCol,
+  };
+
+  GameContextProvider.propTypes = {
+    children: PropTypes.node.isRequired,
   };
 
   return (

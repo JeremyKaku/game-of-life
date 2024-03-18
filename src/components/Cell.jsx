@@ -11,6 +11,7 @@ function Cell(props) {
   let aliveStatus = cellState.cellGrid[props.row][props.col].status;
   let lastAlive = cellState.cellGrid[props.row][props.col].lastAlive;
 
+  // Change the status of the cell when clicked
   function onClick() {
     let newCellState = { ...cellState };
     newCellState.cellGrid[props.row][props.col].status =
@@ -24,6 +25,7 @@ function Cell(props) {
 
   let className = "cell";
 
+  // Set the color of the cell
   if (aliveStatus) {
     switch (lastAlive) {
       case 0:
