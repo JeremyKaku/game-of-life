@@ -116,7 +116,7 @@ export default function GameOfLife() {
   //Handle the submit button
   function handleSubmit() {
     setErrorMsg("");
-    console.log(inputRows);
+    setIsRunning(false);
     if (inputRows === "") {
       setErrorMsg("Please enter a value for Height!");
       return;
@@ -148,11 +148,12 @@ export default function GameOfLife() {
     <div>
       <h1>Game of Life</h1>
 
-      <div className="condition">
+      <div>
         <div className="error">{errorMsg}</div>
         <input
           type="text"
           id="height"
+          className="input"
           placeholder="Height"
           onChange={handleInputRowsChange}
           value={inputRows}
@@ -160,25 +161,26 @@ export default function GameOfLife() {
         <input
           type="text"
           id="width"
+          className="input"
           placeholder="Width"
           onChange={handleInputColsChange}
           value={inputCols}
         ></input>
-        <button id="submit" onClick={handleSubmit}>
+        <button id="submit" className="button" onClick={handleSubmit}>
           Submit
         </button>
       </div>
       <h3>Alive Count: {cellState.aliveCount}</h3>
 
       <Grid />
-      <div className="bottom">
-        <button id="reset" onClick={handleReset}>
+      <div>
+        <button id="reset" className="button" onClick={handleReset}>
           Reset
         </button>
-        <button id="singal" onClick={handleSingleStep}>
+        <button id="singal" className="button" onClick={handleSingleStep}>
           Next Step
         </button>
-        <button id="auto-play" onClick={handleAutoPlay}>
+        <button id="auto-play" className="button" onClick={handleAutoPlay}>
           Auto Play
         </button>
       </div>

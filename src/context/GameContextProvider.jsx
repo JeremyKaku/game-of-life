@@ -7,7 +7,7 @@ export default function GameContextProvider({ children }) {
   const [row, setRow] = useState(20);
   const [col, setCol] = useState(20);
 
-  const [rate] = useState(0.05);
+  const [rate, setRate] = useState(0.05);
 
   const [cellState, setCellState] = useState(() => {
     const initialGrid = Array.from({ length: row }, () =>
