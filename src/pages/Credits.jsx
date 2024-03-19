@@ -31,6 +31,8 @@ export default function Credits() {
             <div className="list-container">
               <ul>
                 <li>React</li>
+                <li>JavaScript</li>
+                <li>React-router-dom</li>
                 <li>Framer-motion</li>
                 <li>React-bootstrap-icons</li>
               </ul>
