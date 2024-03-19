@@ -14,28 +14,6 @@ export default function GameContextProvider({ children }) {
   const [randomizationProbability, setRandomizationProbability] =
     useState(0.01);
 
-  // const [cellState, setCellState] = useState(() => {
-  //   const initialGrid = Array.from({ length: row }, () =>
-  //     Array.from({ length: col }, () => ({
-  //       lastAlive: 0,
-  //       status: Math.random() <= rate,
-  //     }))
-  //   );
-  //   const count = initialGrid.reduce((total, row) => {
-  //     return (
-  //       total +
-  //       row.reduce((rowTotal, cell) => {
-  //         return rowTotal + (cell.status ? 1 : 0);
-  //       }, 0)
-  //     );
-  //   }, 0);
-
-  //   return {
-  //     aliveCount: count,
-  //     cellGrid: initialGrid,
-  //   };
-  // });
-
   // Generate clustered grid function
   const generateClusteredGrid = (numRows, numCols, initialAlivePercentage) => {
     const totalCells = Math.floor(numRows * numCols * initialAlivePercentage);
@@ -43,7 +21,7 @@ export default function GameContextProvider({ children }) {
       Array.from({ length: numCols }, () => ({
         twoFramesLife: 2,
         lastAlive: 0,
-        status: false,
+        status: 0,
       }))
     );
 
@@ -67,7 +45,7 @@ export default function GameContextProvider({ children }) {
             newCol < numCols
           ) {
             // Set as alive
-            grid[newRow][newCol].status = true;
+            grid[newRow][newCol].status = 1;
           }
         }
       }
@@ -78,7 +56,7 @@ export default function GameContextProvider({ children }) {
       for (let j = 0; j < numCols; j++) {
         if (!grid[i][j].status && Math.random() < randomizationProbability) {
           // Set as alive with lower probability
-          grid[i][j].status = true;
+          grid[i][j].status = 1;
         }
       }
     }
@@ -93,7 +71,7 @@ export default function GameContextProvider({ children }) {
       return (
         total +
         row.reduce((rowTotal, cell) => {
-          return rowTotal + (cell.status ? 1 : 0);
+          return rowTotal + cell.status;
         }, 0)
       );
     }, 0);
@@ -115,25 +93,6 @@ export default function GameContextProvider({ children }) {
         cellGrid: grid,
       };
     });
-    // const initialGrid = Array.from({ length: rows }, () =>
-    //   Array.from({ length: cols }, () => ({
-    //     lastAlive: 0,
-    //     status: Math.random() <= rate,
-    //   }))
-    // );
-    // const count = initialGrid.reduce((total, row) => {
-    //   return (
-    //     total +
-    //     row.reduce((rowTotal, cell) => {
-    //       return rowTotal + (cell.status ? 1 : 0);
-    //     }, 0)
-    //   );
-    // }, 0);
-
-    // setCellState({
-    //   aliveCount: count,
-    //   cellGrid: initialGrid,
-    // });
   };
 
   const contextValue = {

@@ -19,29 +19,25 @@ export default function GameOfLife() {
   const [isInputColErr, setIsInputColErr] = useState(false);
 
   //Count the cell's neighbors
-  function countNeighbors(cellGrid, row, col) {
+  function countNeighbors(cellGrid, i, j) {
     let count = 0;
-    const directions = [
-      [-1, -1],
-      [-1, 0],
-      [-1, 1],
-      [0, -1],
-      [0, 1],
-      [1, -1],
-      [1, 0],
-      [1, 1],
-    ];
-    for (const [dx, dy] of directions) {
-      const newRow = row + dx;
-      const newCol = col + dy;
-      if (
-        newRow >= 0 &&
-        newRow < cellGrid.length &&
-        newCol >= 0 &&
-        newCol < cellGrid[newRow].length
-      ) {
-        if (cellGrid[newRow][newCol].status) {
-          count++;
+    for (let m = -1; m <= 1; m++) {
+      for (let n = -1; n <= 1; n++) {
+        const neighbourRow = i + m;
+        const neighbourColumn = j + n;
+
+        if (
+          neighbourRow >= 0 &&
+          neighbourColumn >= 0 &&
+          neighbourRow <= cellGrid.length - 1 &&
+          neighbourColumn <= cellGrid[0].length - 1
+        ) {
+          const value = cellGrid[neighbourRow][neighbourColumn].status;
+          if (i === neighbourRow && j === neighbourColumn) {
+            continue;
+          } else if (value === 1 || value === 3) {
+            count++;
+          }
         }
       }
     }
@@ -79,27 +75,45 @@ export default function GameOfLife() {
       for (let j = 0; j < newCellState.cellGrid[i].length; j++) {
         const neighbors = countNeighbors(newCellState.cellGrid, i, j);
         if (newCellState.cellGrid[i][j].status) {
-          if (neighbors < 2 || neighbors > 3) {
-            newCellState.cellGrid[i][j].status = false;
+          if (neighbors === 2 || neighbors === 3) {
+            newCellState.cellGrid[i][j].status = 3;
+            if (isLongerLasting) {
+              if (newCellState.cellGrid[i][j].twoFramesLife < 2) {
+                newCellState.cellGrid[i][j].twoFramesLife = 2;
+              }
+            }
+          } else {
+            newCellState.cellGrid[i][j].status = 1;
           }
         } else {
-          if (neighbors === 3) {
-            newCellState.cellGrid[i][j].status = true;
-            newCellState.cellGrid[i][j].lastAlive =
-              newCellState.cellGrid[i][j].lastAlive + 1;
-          }
-          // "Longer Lasting" mode logic
-          if (isLongerLasting && newCellState.cellGrid[i][j].lastAlive === 1) {
-            const nearbyCell = findNearbyCellToInfect(
-              newCellState.cellGrid,
-              i,
-              j
-            );
-            if (nearbyCell) {
-              newCellState.cellGrid[i][j].status = true; // Survive
-              newCellState.cellGrid[i][j].lastAlive = 0; // Reset frame count
+          if (isLongerLasting) {
+            if (newCellState.cellGrid[i][j].twoFramesLife > 0) {
+              // const nearbyCell = findNearbyCellToInfect(
+              //   newCellState.cellGrid,
+              //   i,
+              //   j
+              // );
+              if (neighbors) {
+                newCellState.cellGrid[i][j].status = 2;
+                newCellState.cellGrid[i][j].lastAlive++;
+              }
+              newCellState.cellGrid[i][j].twoFramesLife--;
             }
+          } else if (neighbors === 3) {
+            newCellState.cellGrid[i][j].status = 2;
+            newCellState.cellGrid[i][j].lastAlive++;
+            newCellState.cellGrid[i][j].twoFramesLife = 2;
           }
+        }
+      }
+    }
+    for (let i = 0; i < newCellState.cellGrid.length; i++) {
+      for (let j = 0; j < newCellState.cellGrid[i].length; j++) {
+        const value = newCellState.cellGrid[i][j].status;
+        if (value === 2 || value === 3) {
+          newCellState.cellGrid[i][j].status = 1;
+        } else if (value === 1) {
+          newCellState.cellGrid[i][j].status = 0;
         }
       }
     }
