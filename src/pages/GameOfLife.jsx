@@ -12,6 +12,11 @@ export default function GameOfLife() {
   const [inputRows, setInputRows] = useState("");
   const [inputCols, setInputCols] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const [isLongerLasting, setIsLongerLasting] = useState(false);
+  const [auto, setAuto] = useState("button");
+  const [longer, setLonger] = useState("button longer-lasting");
+  const [isInputRowErr, setIsInputRowErr] = useState(false);
+  const [isInputColErr, setIsInputColErr] = useState(false);
 
   //Count the cell's neighbors
   function countNeighbors(cellGrid, row, col) {
@@ -43,6 +48,30 @@ export default function GameOfLife() {
     return count;
   }
 
+  // Find a nearby cell to infect (for "Longer Lasting" mode)
+  function findNearbyCellToInfect(cellGrid, row, col) {
+    const directions = [
+      [-1, 0],
+      [1, 0],
+      [0, -1],
+      [0, 1], // Up, Down, Left, Right
+    ];
+    for (const [dx, dy] of directions) {
+      const newRow = row + dx;
+      const newCol = col + dy;
+      if (
+        newRow >= 0 &&
+        newRow < cellGrid.length &&
+        newCol >= 0 &&
+        newCol < cellGrid[newRow].length &&
+        cellGrid[newRow][newCol].status
+      ) {
+        return [newRow, newCol]; // Return the nearby cell
+      }
+    }
+    return null; // No nearby cell found
+  }
+
   //Generate the next generation of cells
   function generateNextGeneration() {
     let newCellState = { ...cellState };
@@ -59,6 +88,18 @@ export default function GameOfLife() {
             newCellState.cellGrid[i][j].lastAlive =
               newCellState.cellGrid[i][j].lastAlive + 1;
           }
+          // "Longer Lasting" mode logic
+          if (isLongerLasting && newCellState.cellGrid[i][j].lastAlive === 1) {
+            const nearbyCell = findNearbyCellToInfect(
+              newCellState.cellGrid,
+              i,
+              j
+            );
+            if (nearbyCell) {
+              newCellState.cellGrid[i][j].status = true; // Survive
+              newCellState.cellGrid[i][j].lastAlive = 0; // Reset frame count
+            }
+          }
         }
       }
     }
@@ -72,13 +113,27 @@ export default function GameOfLife() {
   useEffect(() => {
     let intervalId;
     if (isRunning) {
+      setAuto("button active");
       intervalId = setInterval(() => {
         generateNextGeneration();
       }, INTERVAL_MS);
+    } else {
+      setAuto("button");
     }
 
     return () => clearInterval(intervalId);
   }, [cellState, isRunning]);
+
+  useEffect(() => {
+    let intervalId;
+    if (isLongerLasting) {
+      intervalId = setLonger("button longer-lasting active");
+    } else {
+      intervalId = setLonger("button longer-lasting");
+    }
+
+    return () => clearInterval(intervalId);
+  }, [isLongerLasting]);
 
   //Reset the grid
   function handleReset() {
@@ -87,6 +142,11 @@ export default function GameOfLife() {
     setInputCols("");
     setInputRows("");
     setErrorMsg("");
+    setIsLongerLasting(false);
+    setLonger("button longer-lasting");
+    setAuto("button");
+    setIsInputRowErr(false);
+    setIsInputColErr(false);
   }
 
   //Single step
@@ -97,6 +157,7 @@ export default function GameOfLife() {
 
   //Handle the input for the height
   function handleInputRowsChange(e) {
+    setIsInputRowErr(false);
     let value = e.target.value.replace(/[^\d]/g, "").replace(/^0+/, "");
     if (value.length > 2) {
       value = value.slice(0, 2);
@@ -106,6 +167,7 @@ export default function GameOfLife() {
 
   //Handle the input for the width
   function handleInputColsChange(e) {
+    setIsInputColErr(false);
     let value = e.target.value.replace(/[^\d]/g, "").replace(/^0+/, "");
     if (value.length > 2) {
       value = value.slice(0, 2);
@@ -118,20 +180,24 @@ export default function GameOfLife() {
     setErrorMsg("");
     setIsRunning(false);
     if (inputRows === "") {
+      setIsInputRowErr(true);
       setErrorMsg("Please enter a value for Height!");
       return;
     }
 
     if (inputCols === "") {
+      setIsInputColErr(true);
       setErrorMsg("Please enter a value for Width!");
       return;
     }
 
     if (inputRows < 3 || inputRows > 40) {
+      setIsInputRowErr(true);
       setErrorMsg("Height must be between 3 and 40!");
       return;
     }
     if (inputCols < 3 || inputCols > 40) {
+      setIsInputColErr(true);
       setErrorMsg("Width must be between 3 and 40!");
       return;
     }
@@ -144,6 +210,11 @@ export default function GameOfLife() {
     setIsRunning(!isRunning);
   }
 
+  //Handle the longer lasting button
+  function handleLongerLasting() {
+    setIsLongerLasting(!isLongerLasting);
+  }
+
   return (
     <div>
       <h1>Game of Life</h1>
@@ -153,7 +224,7 @@ export default function GameOfLife() {
         <input
           type="text"
           id="height"
-          className="input"
+          className={isInputRowErr ? "input error" : "input"}
           placeholder="Height"
           onChange={handleInputRowsChange}
           value={inputRows}
@@ -161,7 +232,7 @@ export default function GameOfLife() {
         <input
           type="text"
           id="width"
-          className="input"
+          className={isInputColErr ? "input error" : "input"}
           placeholder="Width"
           onChange={handleInputColsChange}
           value={inputCols}
@@ -170,18 +241,30 @@ export default function GameOfLife() {
           Submit
         </button>
       </div>
-      <h3>Alive Count: {cellState.aliveCount}</h3>
-
-      <Grid />
-      <div>
+      <div className="grid-container">
+        <h3>Alive Count: {cellState.aliveCount}</h3>
+        <Grid />
+      </div>
+      <div className="bottom">
         <button id="reset" className="button" onClick={handleReset}>
           Reset
         </button>
-        <button id="singal" className="button" onClick={handleSingleStep}>
+        <button
+          id="singal"
+          className="button next-fram"
+          onClick={handleSingleStep}
+        >
           Next Frame
         </button>
-        <button id="auto-play" className="button" onClick={handleAutoPlay}>
+        <button id="auto-play" className={auto} onClick={handleAutoPlay}>
           Auto Play
+        </button>
+        <button
+          id="longer-lasting"
+          className={longer}
+          onClick={handleLongerLasting}
+        >
+          Longer Lasting
         </button>
       </div>
     </div>

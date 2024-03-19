@@ -32,20 +32,21 @@ export default function Credits() {
               <ul>
                 <li>React</li>
                 <li>Framer-motion</li>
+                <li>React-bootstrap-icons</li>
               </ul>
             </div>
             <br />
             <p>
               GitHub Repository:{" "}
               <a href="https://github.com/JeremyKaku/jing-guo-xue-han-assignment2.git">
-                GitHub Repo
+                Click Here
               </a>
             </p>
           </div>
         </marquee>
       </div>
       <button className="btn" onClick={toggleScrolling}>
-        {isScrolling ? "Pause" : "Resume"}
+        {isScrolling ? "Pause" : "Play"}
         {isScrolling ? <Pause size={27} /> : <Play size={27} />}
       </button>
     </div>

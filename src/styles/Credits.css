@@ -5,22 +5,22 @@
 }
 
 .scrolling-container {
-  height: 500px;
+  height: 400px;
   overflow: hidden;
   text-align: center;
 }
 
 .credits-container h1 {
-  font-size: 40px;
+  font-size: 2rem;
   font-weight: 700;
   letter-spacing: 0.8px;
   line-height: 1;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   display: block;
 }
 
 .scrolling-container p {
-  font-size: 18px;
+  font-size: 1.5rem;
   letter-spacing: 0.8px;
   line-height: 1.5em;
   width: 96%;
@@ -44,7 +44,7 @@ marquee {
   height: 100%;
   padding: 10px;
   box-sizing: border-box;
-  margin-top: 3rem;
+  /* margin-top: 3rem; */
 }
 
 button {
@@ -78,3 +78,12 @@ button svg {
 button:hover svg {
   margin-left: 25px;
 }
+
+/* @keyframes marquee {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(50%);
+  }
+} */
