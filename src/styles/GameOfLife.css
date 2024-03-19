@@ -1,9 +1,14 @@
 h1 {
   margin-top: 4rem;
+  font-size: 2em;
 }
 
 .error {
   color: red;
+}
+
+.grid-container {
+  margin: 1em 0.5em 1em 1em;
 }
 
 .button {
@@ -12,10 +17,32 @@ h1 {
   width: 6rem;
   cursor: pointer;
 }
+.button:active {
+  background-color: rgb(194, 155, 183);
+}
 
 .input {
   margin: 1em 0.1em 1em 0.1em;
   font-size: 0.9rem;
   height: 1.8rem;
   width: 5rem;
+}
+.input.error {
+  border: 2px solid red;
+}
+
+.next-fram {
+  width: 7rem;
+}
+
+.active {
+  background-color: rgb(194, 155, 183);
+}
+
+.longer-lasting {
+  width: 10rem;
+}
+
+.bottom {
+  margin-bottom: 5rem;
 }
