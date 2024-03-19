@@ -44,30 +44,6 @@ export default function GameOfLife() {
     return count;
   }
 
-  // Find a nearby cell to infect (for "Longer Lasting" mode)
-  function findNearbyCellToInfect(cellGrid, row, col) {
-    const directions = [
-      [-1, 0],
-      [1, 0],
-      [0, -1],
-      [0, 1], // Up, Down, Left, Right
-    ];
-    for (const [dx, dy] of directions) {
-      const newRow = row + dx;
-      const newCol = col + dy;
-      if (
-        newRow >= 0 &&
-        newRow < cellGrid.length &&
-        newCol >= 0 &&
-        newCol < cellGrid[newRow].length &&
-        cellGrid[newRow][newCol].status
-      ) {
-        return [newRow, newCol]; // Return the nearby cell
-      }
-    }
-    return null; // No nearby cell found
-  }
-
   //Generate the next generation of cells
   function generateNextGeneration() {
     let newCellState = { ...cellState };
@@ -88,11 +64,6 @@ export default function GameOfLife() {
         } else {
           if (isLongerLasting) {
             if (newCellState.cellGrid[i][j].twoFramesLife > 0) {
-              // const nearbyCell = findNearbyCellToInfect(
-              //   newCellState.cellGrid,
-              //   i,
-              //   j
-              // );
               if (neighbors) {
                 newCellState.cellGrid[i][j].status = 2;
                 newCellState.cellGrid[i][j].lastAlive++;
