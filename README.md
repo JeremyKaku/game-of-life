@@ -61,17 +61,17 @@ To start this project run
 
 ## Demo
 ##### Home
-<img src="images/Demo_Home.gif" width="800" height="400">
+<img src="images/Demo_Home.gif" width="600" height="300">
 
 ##### Game
-<img src="images/Demo_Game1.gif" width="800" height="400">
-<img src="images/Demo_Game2.gif" width="800" height="400">
-<img src="images/Demo_Game3.gif" width="800" height="400">
-<img src="images/Demo_Game4.gif" width="800" height="400">
-<img src="images/Demo_Game5.gif" width="800" height="400">
+<img src="images/Demo_Game1.gif" width="600" height="300">
+<img src="images/Demo_Game2.gif" width="600" height="300">
+<img src="images/Demo_Game3.gif" width="600" height="300">
+<img src="images/Demo_Game4.gif" width="600" height="300">
+<img src="images/Demo_Game5.gif" width="600" height="300">
 
 ##### Credits
-<img src="images/Demo_Credits.gif" width="800" height="400">
+<img src="images/Demo_Credits.gif" width="600" height="300">
 
 ## Contributing
 
