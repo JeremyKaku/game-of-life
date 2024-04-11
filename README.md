@@ -60,7 +60,7 @@ To start this project run
 
 
 ## Demo
-##### Home
+##### Home Page
 <img src="images/Demo_Home.gif" width="600" height="300">
 
 ##### Game
@@ -70,10 +70,10 @@ To start this project run
 <img src="images/Demo_Game4.gif" width="600" height="300">
 <img src="images/Demo_Game5.gif" width="600" height="300">
 
-##### Credits
+##### Credits Page
 <img src="images/Demo_Credits.gif" width="600" height="300">
 
-## Contributing
+## Contributing Page
 
 If you'd like to contribute to this project, you can:
 
